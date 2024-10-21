@@ -27,10 +27,12 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
         self.surf = pygame.image.load("media/tiny_ship.png").convert()
-        # self.surf.set_colorkey((0, 0, 0), RLEACCEL)
-        # self.surf = pygame.Surface((75, 25))
-        # self.surf.fill((255, 255, 255))
-        self.rect = self.surf.get_rect()
+        self.rect = self.surf.get_rect(
+            center = (
+                random.randint(0, SCREEN_WIDTH // 4),
+                random.randint(20, SCREEN_HEIGHT),
+            )
+        )
 
     # Move the sprite based on user keypresses
     def update(self, pressed_keys):
@@ -61,8 +63,6 @@ class Enemy(pygame.sprite.Sprite):
         super(Enemy, self).__init__()
         self.surf = pygame.image.load("media/missile.png").convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        # self.surf = pygame.Surface((20,20))
-        # self.surf.fill((255,255,255))
         self.rect = self.surf.get_rect(
             center = (
                 random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
@@ -183,6 +183,7 @@ while running:
             new_cloud = Cloud()
             clouds.add(new_cloud)
             all_sprites.add(new_cloud)     
+        # Increment score
         elif event.type == ADDSCORE:
             player_score += 1    
             
