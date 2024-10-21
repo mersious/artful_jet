@@ -107,6 +107,10 @@ pygame.init()
 # Create the screen object
 # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("The Artful Jet")
+
+#initialize font
+font = pygame.font.SysFont(None, 32)
 
 # Setup the clock for a decent framerate
 clock = pygame.time.Clock()
@@ -116,6 +120,8 @@ ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, 250)
 ADDCLOUD = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDCLOUD, 1000)
+ADDSCORE = pygame.USEREVENT + 3
+pygame.time.set_timer(ADDSCORE, 250)
 
 # Instantiate player. Right now, this is just a rectangle.
 player = Player()
@@ -149,6 +155,11 @@ collision_sound.set_volume(0.5)
 # Variable to keep the main loop running
 running = True
 
+WHITE = (255, 255, 255)
+
+player_score = 0
+
+
 # Main loop
 while running:
     # for loop through the event queue
@@ -171,8 +182,10 @@ while running:
             # Create the new cloud and add it to sprite groups
             new_cloud = Cloud()
             clouds.add(new_cloud)
-            all_sprites.add(new_cloud)         
-
+            all_sprites.add(new_cloud)     
+        elif event.type == ADDSCORE:
+            player_score += 1    
+            
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()
 
@@ -185,6 +198,11 @@ while running:
 
     # Fill the screen with black
     screen.fill((135, 206, 250))
+
+    # Render the score
+    score_text = font.render(f'Score: {player_score}', True, WHITE)
+    # Display the score at the top-left corner
+    screen.blit(score_text, (10, 10))
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
