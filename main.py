@@ -98,6 +98,9 @@ class Cloud(pygame.sprite.Sprite):
         if self.rect.right < 0:
             self.kill()
 
+class Button:
+    def __init__9
+
 # Setup for sounds. Defaults are good.
 pygame.mixer.init()
 
@@ -155,7 +158,21 @@ collision_sound.set_volume(0.5)
 # Variable to keep the main loop running
 running = True
 
-WHITE = (255, 255, 255)
+class Colors:
+    WHITE = pygame.Color("white")
+    RED = pygame.Color("red")
+    GREEN = pygame.Color('green')
+    BLUE = pygame.Color('blue')
+    BLACK = pygame.Color('black')
+    YELLOW = pygame.Color('yellow')
+    CYAN = pygame.Color('cyan')
+    MAGNETA = pygame.Color('magenta')
+    DARK_ORANGE = pygame.Color('darkorange1')
+    CRIMSON = pygame.Color('crimson')
+    
+
+
+
 
 player_score = 0
 
@@ -201,7 +218,7 @@ while running:
     screen.fill((135, 206, 250))
 
     # Render the score
-    score_text = font.render(f'Score: {player_score}', True, WHITE)
+    score_text = font.render(f'Score: {player_score}', True, Colors.WHITE)
     # Display the score at the top-left corner
     screen.blit(score_text, (10, 10))
 
